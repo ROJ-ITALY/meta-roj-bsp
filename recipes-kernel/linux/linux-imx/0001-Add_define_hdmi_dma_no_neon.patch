@@ -1,0 +1,25 @@
+From 45d623155c1e8342eb7a868bfb7f94c2ed7d9c33 Mon Sep 17 00:00:00 2001
+From: Marco Arlone <marco.arlone@roj.com>
+Date: Tue, 9 Feb 2016 09:33:14 +0100
+Subject: [PATCH] Add_define_hdmi_dma_no_neon
+
+---
+ sound/soc/fsl/imx-hdmi-dma.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/sound/soc/fsl/imx-hdmi-dma.c b/sound/soc/fsl/imx-hdmi-dma.c
+index 8f3e798..2cd92ce 100755
+--- a/sound/soc/fsl/imx-hdmi-dma.c
++++ b/sound/soc/fsl/imx-hdmi-dma.c
+@@ -286,6 +286,8 @@ static void init_table(int channels)
+ 	}
+ }
+ 
++#define HDMI_DMA_NO_NEON
++
+ #ifdef HDMI_DMA_NO_NEON
+ /* Optimization for IEC head */
+ static void hdmi_dma_copy_16_c_lut(u16 *src, u32 *dst, int samples,
+-- 
+1.9.1
+

@@ -1,0 +1,100 @@
+From bc7cd946011175eb35c76dedb6452ef6b5b0367c Mon Sep 17 00:00:00 2001
+From: Marco Arlone <marco.arlone@roj.com>
+Date: Mon, 2 May 2016 11:37:10 +0200
+Subject: [PATCH] Upgrade to support iMx6 Solo
+
+---
+ arch/arm/Kconfig                  |  3 +++
+ board/freescale/mx6qroj/Kconfig   |  2 +-
+ board/freescale/mx6qroj/mx6dl.cfg | 16 ++++++++--------
+ include/configs/mx6qroj.h         |  6 +++++-
+ 4 files changed, 17 insertions(+), 10 deletions(-)
+ mode change 100644 => 100755 board/freescale/mx6qroj/mx6dl.cfg
+
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index b0ec068..c662412 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -399,6 +399,9 @@ config TARGET_MX6QARM2
+ config TARGET_MX6QROJ
+         bool "Support mx6qroj"
+ 
++config TARGET_MX6DLROJ
++        bool "Support mx6dlroj"
++
+ config TARGET_MX6QSABREAUTO
+ 	bool "Support mx6qsabreauto"
+ 
+diff --git a/board/freescale/mx6qroj/Kconfig b/board/freescale/mx6qroj/Kconfig
+index 387035d..0a85f65 100644
+--- a/board/freescale/mx6qroj/Kconfig
++++ b/board/freescale/mx6qroj/Kconfig
+@@ -1,4 +1,4 @@
+-if TARGET_MX6QROJ
++if TARGET_MX6QROJ || TARGET_MX6DLROJ
+ 
+ config SYS_CPU
+ 	default "armv7"
+diff --git a/board/freescale/mx6qroj/mx6dl.cfg b/board/freescale/mx6qroj/mx6dl.cfg
+old mode 100644
+new mode 100755
+index fed8466..d11256d
+--- a/board/freescale/mx6qroj/mx6dl.cfg
++++ b/board/freescale/mx6qroj/mx6dl.cfg
+@@ -69,12 +69,12 @@ DATA 4 0x020e0484 0x00000028
+ DATA 4 0x020e0488 0x00000028
+ DATA 4 0x020e048c 0x00000028
+ DATA 4 0x021b0800 0xa1390003
+-DATA 4 0x021b080c 0x000D0016
+-DATA 4 0x021b0810 0x001D0016
+-DATA 4 0x021b083c 0x03440354
+-DATA 4 0x021b0840 0x033C033C
+-DATA 4 0x021b0848 0x4032363A
+-DATA 4 0x021b0850 0x30383432
++DATA 4 0x021b080c 0x0043004B
++DATA 4 0x021b0810 0x0038003A
++DATA 4 0x021b083c 0x030C0308
++DATA 4 0x021b0840 0x02600268
++DATA 4 0x021b0848 0x4C4E5450
++DATA 4 0x021b0850 0x3836322E
+ DATA 4 0x021b081c 0x33333333
+ DATA 4 0x021b0820 0x33333333
+ DATA 4 0x021b0824 0x33333333
+@@ -89,7 +89,7 @@ DATA 4 0x021b0018 0x00011740
+ DATA 4 0x021b001c 0x00008000
+ DATA 4 0x021b002c 0x000026d2
+ DATA 4 0x021b0030 0x00431023
+-DATA 4 0x021b0040 0x00000027
++DATA 4 0x021b0040 0x00000017
+ DATA 4 0x021b0000 0x83190000
+ DATA 4 0x021b001c 0x02008032
+ DATA 4 0x021b001c 0x00008033
+@@ -98,7 +98,7 @@ DATA 4 0x021b001c 0x15208030
+ DATA 4 0x021b001c 0x04008040
+ DATA 4 0x021b0020 0x00007800
+ DATA 4 0x021b0818 0x00022227
+-DATA 4 0x021b4818 0x00022227
++/*DATA 4 0x021b4818 0x00022227*/
+ DATA 4 0x021b0004 0x0002556D
+ DATA 4 0x021b0404 0x00011006
+ DATA 4 0x021b001c 0x00000000
+diff --git a/include/configs/mx6qroj.h b/include/configs/mx6qroj.h
+index 5eb4ea3..7cf1fdd 100644
+--- a/include/configs/mx6qroj.h
++++ b/include/configs/mx6qroj.h
+@@ -18,7 +18,11 @@
+ #define CONFIG_DEFAULT_FDT_FILE	"imx6dl-roj.dtb"
+ #endif
+ #define CONFIG_MMCROOT			"/dev/mmcblk0p2"
+-#define PHYS_SDRAM_SIZE		(1u * 1024 * 1024 * 1024)
++#if defined CONFIG_MX6Q
++#define PHYS_SDRAM_SIZE		(1u * 1024 * 1024 * 1024)*/
++#elif defined CONFIG_MX6DL
++#define PHYS_SDRAM_SIZE		(1u * 512 * 1024 * 1024)
++#endif
+ 
+ /* USB Configs */
+ #define CONFIG_CMD_USB
+-- 
+1.9.1
+

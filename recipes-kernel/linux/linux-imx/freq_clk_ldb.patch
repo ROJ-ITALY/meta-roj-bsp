@@ -1,0 +1,19 @@
+commit 40fc2d4660147f9f3611292f96174ee68a5a392f
+Author: Stefano Gurrieri <stefanogurrieri@roj.com>
+Date:   Thu May 14 11:22:10 2015 +0200
+
+    Frequency clk lvds changed.
+
+diff --git a/arch/arm/mach-imx/clk-imx6q.c b/arch/arm/mach-imx/clk-imx6q.c
+index 1e5c410..1314ecc 100644
+--- a/arch/arm/mach-imx/clk-imx6q.c
++++ b/arch/arm/mach-imx/clk-imx6q.c
+@@ -221,7 +221,7 @@ static void init_ldb_clks(enum mx6q_clks new_parent)
+ 	/*
+ 	 * Perform the LDB parent clock switch.
+ 	 */
+-	clk_set_parent(clk[ldb_di0_sel], clk[new_parent]);
++	clk_set_parent(clk[ldb_di0_sel], clk[pll5_video_div]);
+ 	clk_set_parent(clk[ldb_di1_sel], clk[new_parent]);
+ 
+ 	/*
