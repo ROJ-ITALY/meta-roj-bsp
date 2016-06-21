@@ -1,0 +1,223 @@
+From 6f058173bf1e2fb6eebb01b7f5a64e14eceae4ab Mon Sep 17 00:00:00 2001
+From: Stefano Gurrieri <stefano.gurrieri@roj.com>
+Date: Tue, 21 Jun 2016 10:28:10 +0200
+Subject: [PATCH] Upgrade-to-support-iMx6-Solo
+
+---
+ board/roj/mx6qroj/mx6dl.cfg | 155 ++++++++++++++++++++------------------------
+ board/roj/mx6qroj/mx6qroj.c |   2 +-
+ boards.cfg                  |   3 +-
+ include/configs/mx6qroj.h   |   4 +-
+ 4 files changed, 77 insertions(+), 87 deletions(-)
+
+diff --git a/board/roj/mx6qroj/mx6dl.cfg b/board/roj/mx6qroj/mx6dl.cfg
+index e491c63..fa4070f 100644
+--- a/board/roj/mx6qroj/mx6dl.cfg
++++ b/board/roj/mx6qroj/mx6dl.cfg
+@@ -51,89 +51,78 @@ CSF 0x2000
+  *	Address	  absolute address of the register
+  *	value	  value to be stored in the register
+  */
+-DATA 4, 0x020e0774, 0x000C0000
+-DATA 4, 0x020e0754, 0x00000000
+-DATA 4, 0x020e04ac, 0x00000030
+-DATA 4, 0x020e04b0, 0x00000030
+-DATA 4, 0x020e0464, 0x00000030
+-DATA 4, 0x020e0490, 0x00000030
+-DATA 4, 0x020e074c, 0x00000030
+-DATA 4, 0x020e0494, 0x00000030
+-DATA 4, 0x020e04a0, 0x00000000
+-DATA 4, 0x020e04b4, 0x00000030
+-DATA 4, 0x020e04b8, 0x00000030
+-DATA 4, 0x020e076c, 0x00000030
+-DATA 4, 0x020e0750, 0x00020000
+-DATA 4, 0x020e04bc, 0x00000028
+-DATA 4, 0x020e04c0, 0x00000028
+-DATA 4, 0x020e04c4, 0x00000028
+-DATA 4, 0x020e04c8, 0x00000028
+-DATA 4, 0x020e04cc, 0x00000028
+-DATA 4, 0x020e04d0, 0x00000028
+-DATA 4, 0x020e04d4, 0x00000028
+-DATA 4, 0x020e04d8, 0x00000028
+-DATA 4, 0x020e0760, 0x00020000
+-DATA 4, 0x020e0764, 0x00000028
+-DATA 4, 0x020e0770, 0x00000028
+-DATA 4, 0x020e0778, 0x00000028
+-DATA 4, 0x020e077c, 0x00000028
+-DATA 4, 0x020e0780, 0x00000028
+-DATA 4, 0x020e0784, 0x00000028
+-DATA 4, 0x020e078c, 0x00000028
+-DATA 4, 0x020e0748, 0x00000028
+-DATA 4, 0x020e0470, 0x00000028
+-DATA 4, 0x020e0474, 0x00000028
+-DATA 4, 0x020e0478, 0x00000028
+-DATA 4, 0x020e047c, 0x00000028
+-DATA 4, 0x020e0480, 0x00000028
+-DATA 4, 0x020e0484, 0x00000028
+-DATA 4, 0x020e0488, 0x00000028
+-DATA 4, 0x020e048c, 0x00000028
+-DATA 4, 0x021b0800, 0xa1390003
+-DATA 4, 0x021b080c, 0x001F001F
+-DATA 4, 0x021b0810, 0x001F001F
+-DATA 4, 0x021b480c, 0x001F001F
+-DATA 4, 0x021b4810, 0x001F001F
+-DATA 4, 0x021b083c, 0x42190217
+-DATA 4, 0x021b0840, 0x017B017B
+-DATA 4, 0x021b483c, 0x4176017B
+-DATA 4, 0x021b4840, 0x015F016C
+-DATA 4, 0x021b0848, 0x4C4C4D4C
+-DATA 4, 0x021b4848, 0x4A4D4C48
+-DATA 4, 0x021b0850, 0x3F3F3F40
+-DATA 4, 0x021b4850, 0x3538382E
+-DATA 4, 0x021b081c, 0x33333333
+-DATA 4, 0x021b0820, 0x33333333
+-DATA 4, 0x021b0824, 0x33333333
+-DATA 4, 0x021b0828, 0x33333333
+-DATA 4, 0x021b481c, 0x33333333
+-DATA 4, 0x021b4820, 0x33333333
+-DATA 4, 0x021b4824, 0x33333333
+-DATA 4, 0x021b4828, 0x33333333
+-DATA 4, 0x021b08b8, 0x00000800
+-DATA 4, 0x021b48b8, 0x00000800
+-DATA 4, 0x021b0004, 0x00020025
+-DATA 4, 0x021b0008, 0x00333030
+-DATA 4, 0x021b000c, 0x676B5313
+-DATA 4, 0x021b0010, 0xB66E8B63
+-DATA 4, 0x021b0014, 0x01FF00DB
+-DATA 4, 0x021b0018, 0x00001740
+-DATA 4, 0x021b001c, 0x00008000
+-DATA 4, 0x021b002c, 0x000026d2
+-DATA 4, 0x021b0030, 0x006B1023
+-DATA 4, 0x021b0040, 0x00000047
+-DATA 4, 0x021b0000, 0x841A0000
+-DATA 4, 0x021b001c, 0x04008032
+-DATA 4, 0x021b001c, 0x00008033
+-DATA 4, 0x021b001c, 0x00048031
+-DATA 4, 0x021b001c, 0x05208030
+-DATA 4, 0x021b001c, 0x04008040
+-DATA 4, 0x021b0020, 0x00005800
+-DATA 4, 0x021b0818, 0x00011117
+-DATA 4, 0x021b4818, 0x00011117
+-DATA 4, 0x021b0004, 0x00025565
+-DATA 4, 0x021b0404, 0x00011006
+-DATA 4, 0x021b001c, 0x00000000
++DATA 4 0x020e0774 0x000C0000
++DATA 4 0x020e0754 0x00000000
++DATA 4 0x020e04ac 0x00000030
++DATA 4 0x020e04b0 0x00000030
++DATA 4 0x020e0464 0x00000030
++DATA 4 0x020e0490 0x00000030
++DATA 4 0x020e074c 0x00000030
++DATA 4 0x020e0494 0x00000030
++DATA 4 0x020e04a0 0x00000000
++DATA 4 0x020e04b4 0x00000030
++DATA 4 0x020e04b8 0x00000030
++DATA 4 0x020e076c 0x00000030
++DATA 4 0x020e0750 0x00020000
++DATA 4 0x020e04bc 0x00000028
++DATA 4 0x020e04c0 0x00000028
++DATA 4 0x020e04c4 0x00000028
++DATA 4 0x020e04c8 0x00000028
++DATA 4 0x020e04cc 0x00000028
++DATA 4 0x020e04d0 0x00000028
++DATA 4 0x020e04d4 0x00000028
++DATA 4 0x020e04d8 0x00000028
++DATA 4 0x020e0760 0x00020000
++DATA 4 0x020e0764 0x00000028
++DATA 4 0x020e0770 0x00000028
++DATA 4 0x020e0778 0x00000028
++DATA 4 0x020e077c 0x00000028
++DATA 4 0x020e0780 0x00000028
++DATA 4 0x020e0784 0x00000028
++DATA 4 0x020e078c 0x00000028
++DATA 4 0x020e0748 0x00000028
++DATA 4 0x020e0470 0x00000028
++DATA 4 0x020e0474 0x00000028
++DATA 4 0x020e0478 0x00000028
++DATA 4 0x020e047c 0x00000028
++DATA 4 0x020e0480 0x00000028
++DATA 4 0x020e0484 0x00000028
++DATA 4 0x020e0488 0x00000028
++DATA 4 0x020e048c 0x00000028
++DATA 4 0x021b0800 0xa1390003
++DATA 4 0x021b080c 0x0043004B
++DATA 4 0x021b0810 0x0038003A
++DATA 4 0x021b083c 0x030C0308
++DATA 4 0x021b0840 0x02600268
++DATA 4 0x021b0848 0x4C4E5450
++DATA 4 0x021b0850 0x3836322E
++DATA 4 0x021b081c 0x33333333
++DATA 4 0x021b0820 0x33333333
++DATA 4 0x021b0824 0x33333333
++DATA 4 0x021b0828 0x33333333
++DATA 4 0x021b08b8 0x00000800
++DATA 4 0x021b0004 0x0002002D
++DATA 4 0x021b0008 0x00333040
++DATA 4 0x021b000c 0x3F4352F3
++DATA 4 0x021b0010 0xB66D8B63
++DATA 4 0x021b0014 0x01FF00DB
++DATA 4 0x021b0018 0x00011740
++DATA 4 0x021b001c 0x00008000
++DATA 4 0x021b002c 0x000026d2
++DATA 4 0x021b0030 0x00431023
++DATA 4 0x021b0040 0x00000017
++DATA 4 0x021b0000 0x83190000
++DATA 4 0x021b001c 0x02008032
++DATA 4 0x021b001c 0x00008033
++DATA 4 0x021b001c 0x00048031
++DATA 4 0x021b001c 0x15208030
++DATA 4 0x021b001c 0x04008040
++DATA 4 0x021b0020 0x00007800
++DATA 4 0x021b0818 0x00022227
++/*DATA 4 0x021b4818 0x00022227*/
++DATA 4 0x021b0004 0x0002556D
++DATA 4 0x021b0404 0x00011006
++DATA 4 0x021b001c 0x00000000
+ 
+ /* set the default clock gate to save power */
+ DATA 4, 0x020c4068, 0x00C03F3F
+diff --git a/board/roj/mx6qroj/mx6qroj.c b/board/roj/mx6qroj/mx6qroj.c
+index 1bbc325..77c0a6f 100644
+--- a/board/roj/mx6qroj/mx6qroj.c
++++ b/board/roj/mx6qroj/mx6qroj.c
+@@ -87,7 +87,7 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ int dram_init(void)
+ {
+-	gd->ram_size = ((ulong)CONFIG_DDR_MB * 1024 * 1024);
++	gd->ram_size = (512 * 1024 * 1024);
+ 
+ 	return 0;
+ }
+diff --git a/boards.cfg b/boards.cfg
+index bedaa3b..07ce3ef 100644
+--- a/boards.cfg
++++ b/boards.cfg
+@@ -317,7 +317,8 @@ Active  arm         armv7          mx6         boundary        nitrogen6x
+ Active  arm         armv7          mx6         boundary        nitrogen6x          nitrogen6s                           nitrogen6x:IMX_CONFIG=board/boundary/nitrogen6x/nitrogen6s.cfg,MX6S,DDR_MB=512                                                    Eric Nelson <eric.nelson@boundarydevices.com>
+ Active  arm         armv7          mx6         boundary        nitrogen6x          nitrogen6s1g                         nitrogen6x:IMX_CONFIG=board/boundary/nitrogen6x/nitrogen6s1g.cfg,MX6S,DDR_MB=1024                                                 Eric Nelson <eric.nelson@boundarydevices.com>
+ Active  arm         armv7          mx6         congatec        cgtqmx6eval         cgtqmx6qeval                         cgtqmx6eval:IMX_CONFIG=board/freescale/imx/ddr/mx6q_4x_mt41j128.cfg,MX6Q                                                          Leo Sartre <lsartre@adeneo-embedded.com>
+-Active  arm         armv7          mx6         roj             mx6qroj             mx6qroj                              mx6qroj:IMX_CONFIG=board/roj/mx6qroj/mx6q.cfg,MX6Q,DEFAULT_FDT_FILE="imx6q-roj.dtb",DDR_MB=1024                                   Dario Pennisi <dario@iptronix.com>
++Active  arm         armv7          mx6         roj             mx6qroj             mx6qroj                              mx6qroj:IMX_CONFIG=board/roj/mx6qroj/mx6q.cfg,MX6Q,DEFAULT_FDT_FILE="imx6q-roj.dtb",DDR_MB=1024                                   							  Dario Pennisi <dario@iptronix.com>
++Active  arm         armv7          mx6         roj		       mx6qroj		       mx6dlroj		                        mx6qroj:IMX_CONFIG=board/roj/mx6qroj/mx6dl.cfg,MX6DL,DEFAULT_FDT_FILE="imx6dl-roj.dtb",DDR_MB=512									   							  Stefano Gurrieri <stefano.gurrieri@roj.com>
+ Active  arm         armv7          mx6         freescale       mx6qarm2            mx6qarm2                             mx6qarm2:IMX_CONFIG=board/freescale/mx6qarm2/imximage.cfg,MX6Q,DDR_MB=2048                                                        Jason Liu <r64343@freescale.com>
+ Active  arm         armv7          mx6         freescale       mx6qarm2            mx6qarm2_lpddr2                      mx6qarm2:IMX_CONFIG=board/freescale/mx6qarm2/imximage.cfg,MX6Q,MX6DQ_LPDDR2,DDR_MB=512                                            Jason Liu <r64343@freescale.com>
+ Active  arm         armv7          mx6         freescale       mx6qarm2            mx6dlarm2                            mx6qarm2:IMX_CONFIG=board/freescale/mx6qarm2/imximage_mx6dl.cfg,MX6DL,DDR_MB=2048                                                 Jason Liu <r64343@freescale.com>
+diff --git a/include/configs/mx6qroj.h b/include/configs/mx6qroj.h
+index b138627..e8e72a1 100644
+--- a/include/configs/mx6qroj.h
++++ b/include/configs/mx6qroj.h
+@@ -10,8 +10,8 @@
+ #define __MX6QROJ_CONFIG_H
+ 
+ #define CONFIG_MACH_TYPE	3529
+-#define CONFIG_MXC_UART_BASE	UART1_BASE
+-#define CONFIG_CONSOLE_DEV		"ttymxc0"
++#define CONFIG_MXC_UART_BASE	UART2_BASE
++#define CONFIG_CONSOLE_DEV		"ttymxc1"
+ #define CONFIG_MMCROOT			"/dev/mmcblk1p2"  /* SDHC3 */
+ 
+ #include "mx6qroj_common.h"
+-- 
+1.9.1
+
